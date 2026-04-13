@@ -35,9 +35,18 @@ input:focus{outline:2px solid ${B.g};outline-offset:-2px}
 
 /* ═══ DATA ═══ */
 const NAV_ITEMS=[
-  {id:"top",l:"Home"},{id:"problem",l:"The Problem"},{id:"product",l:"How It Works"},
+  {id:"top",l:"Current Issue"},{id:"problem",l:"The Problem"},{id:"product",l:"How It Works"},
   {id:"proof",l:"Proof Points"},{id:"diagnostic",l:"Diagnostic"},
-  {id:"brief",l:"The Brief"},{id:"impact",l:"Impact"},
+  {id:"brief",l:"Feature"},{id:"impact",l:"Impact"},
+];
+
+const IN_THIS_ISSUE=[
+  {n:"01",title:"The Problem",sub:"Why ~90% of carriers fail at integration — and the numbers behind it.",id:"problem",c:B.r},
+  {n:"02",title:"How It Works",sub:"Agentic data orchestration: connect, interpret, self-heal.",id:"product",c:B.g},
+  {n:"03",title:"Proof Points",sub:"What carrier CTOs and VPs of Claims are saying.",id:"proof",c:B.a},
+  {n:"04",title:"The Diagnostic",sub:"8 questions. 4 dimensions. Your integration debt score.",id:"diagnostic",c:B.s},
+  {n:"05",title:"Feature",sub:"Your best engineers are becoming middleware plumbers.",id:"brief",c:B.g},
+  {n:"06",title:"Impact",sub:"Why broken data infrastructure is a financial crisis for workers.",id:"impact",c:B.r},
 ];
 
 const PAIN=[
@@ -138,14 +147,15 @@ function Divider(){
 function Nav({active}){
   return(
     <nav style={{position:"sticky",top:0,zIndex:100,background:B.bg+"ee",backdropFilter:"blur(16px)",borderBottom:`1px solid ${B.bdr}`}}>
-      <div style={{maxWidth:1060,margin:"0 auto",padding:"0 28px",display:"flex",alignItems:"center",justifyContent:"space-between",height:54}}>
+      <div style={{maxWidth:1060,margin:"0 auto",padding:"0 28px",display:"flex",alignItems:"center",justifyContent:"space-between",height:50}}>
         <a href="#top" style={{display:"flex",alignItems:"center",gap:10}}>
           <span style={{fontFamily:F.m,fontSize:12,fontWeight:700,color:B.bg,background:B.g,padding:"3px 8px",borderRadius:3,letterSpacing:1}}>8/0</span>
-          <span style={{fontFamily:F.d,fontSize:16,color:B.tx}}>The Connector</span>
+          <span style={{fontFamily:F.d,fontSize:15,color:B.tx}}>The Connector</span>
+          <span style={{fontFamily:F.m,fontSize:10,color:B.dm,marginLeft:4}}>Issue 001</span>
         </a>
         <div style={{display:"flex",gap:2,overflow:"auto"}}>
           {NAV_ITEMS.filter(s=>s.id!=="top").map(s=>(
-            <a key={s.id} href={`#${s.id}`} style={{fontFamily:F.b,fontSize:12,fontWeight:500,color:active===s.id?B.g:B.mu,background:active===s.id?B.gS:"transparent",borderRadius:6,padding:"5px 12px",whiteSpace:"nowrap",transition:"color .15s"}}>{s.l}</a>
+            <a key={s.id} href={`#${s.id}`} style={{fontFamily:F.b,fontSize:11,fontWeight:500,color:active===s.id?B.g:B.dm,background:active===s.id?B.gS:"transparent",borderRadius:6,padding:"5px 10px",whiteSpace:"nowrap",transition:"color .15s"}}>{s.l}</a>
           ))}
         </div>
       </div>
@@ -153,33 +163,77 @@ function Nav({active}){
   );
 }
 
-/* ═══ HERO ═══ */
+/* ═══ MASTHEAD + IN THIS ISSUE ═══ */
 function Hero(){
   return(
-    <Wrap id="top" style={{paddingTop:56,paddingBottom:48}}>
+    <Wrap id="top" style={{paddingTop:40,paddingBottom:48}}>
+      {/* Masthead */}
       <Rev>
-        <Tag>Agentic Interoperability for Absence & Disability</Tag>
-        <h1 style={{fontFamily:F.d,fontSize:"clamp(36px,5.5vw,60px)",fontWeight:400,lineHeight:1.06,letterSpacing:-1.5,color:B.tx,marginTop:20,marginBottom:16}}>
-          Infinite connectivity.<br/><span style={{color:B.g}}>Zero friction.</span>
-        </h1>
-        <p style={{fontFamily:F.b,fontSize:18,color:B.mu,lineHeight:1.65,maxWidth:560,marginBottom:32}}>
-          8/0 is the intelligent data layer between carriers, TPAs, and employer systems. We turn months of integration work into hours — so your team can stop plumbing and start building.
-        </p>
-        <div style={{display:"flex",gap:12,flexWrap:"wrap"}}>
-          <Btn href="#diagnostic" primary>Run the Diagnostic →</Btn>
-          <Btn href="#brief">Read the Latest Brief</Btn>
-        </div>
-      </Rev>
-      <Rev delay={1}>
-        <div style={{marginTop:56,padding:"22px 0",borderTop:`1px solid ${B.bdr}`,borderBottom:`1px solid ${B.bdr}`,display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:16}}>
-          {[{n:"200h → 2h",l:"Employer connectivity"},{n:"99%",l:"Data accuracy"},{n:"50×",l:"Maintenance efficiency"},{n:"$750K",l:"Saved per integration"}].map((t,i)=>(
-            <div key={i} style={{textAlign:"center"}}>
-              <div style={{fontFamily:F.m,fontSize:22,fontWeight:500,color:B.g}}>{t.n}</div>
-              <div style={{fontFamily:F.b,fontSize:12,color:B.dm,marginTop:4}}>{t.l}</div>
+        <div style={{borderBottom:`1px solid ${B.bdr}`,paddingBottom:24,marginBottom:36}}>
+          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:12}}>
+            <div style={{display:"flex",alignItems:"center",gap:14}}>
+              <span style={{fontFamily:F.m,fontSize:14,fontWeight:700,color:B.bg,background:B.g,padding:"5px 10px",borderRadius:4,letterSpacing:1}}>8/0</span>
+              <div>
+                <div style={{fontFamily:F.d,fontSize:"clamp(28px,4vw,40px)",fontWeight:400,color:B.tx,lineHeight:1,letterSpacing:-.5}}>The Connector</div>
+                <div style={{fontFamily:F.b,fontSize:13,color:B.dm,marginTop:4}}>Published by Eight by Zero</div>
+              </div>
             </div>
-          ))}
+            <div style={{textAlign:"right"}}>
+              <div style={{fontFamily:F.m,fontSize:11,color:B.g,letterSpacing:1.5}}>ISSUE 001</div>
+              <div style={{fontFamily:F.b,fontSize:13,color:B.dm}}>April 2026</div>
+            </div>
+          </div>
         </div>
       </Rev>
+
+      {/* Split: Lead + In This Issue */}
+      <div style={{display:"grid",gridTemplateColumns:"1fr 340px",gap:48}}>
+        {/* Lead story */}
+        <Rev>
+          <div>
+            <Tag>Agentic Interoperability for Absence & Disability</Tag>
+            <h1 style={{fontFamily:F.d,fontSize:"clamp(30px,4.5vw,48px)",fontWeight:400,lineHeight:1.1,letterSpacing:-1,color:B.tx,marginTop:16,marginBottom:14}}>
+              Infinite connectivity.<br/><span style={{color:B.g}}>Zero friction.</span>
+            </h1>
+            <p style={{fontFamily:F.b,fontSize:17,color:B.mu,lineHeight:1.65,maxWidth:520,marginBottom:28}}>
+              The absence & disability ecosystem runs on broken data infrastructure. Every carrier knows it. Most have tried to fix it in-house. This issue of The Connector maps the problem, the emerging solution, and what the smartest operators are doing about it right now.
+            </p>
+            <div style={{display:"flex",gap:12,flexWrap:"wrap",marginBottom:28}}>
+              <Btn href="#brief" primary>Read the Feature →</Btn>
+              <Btn href="https://diagnostic.eightbyzero.com/" >Take the Diagnostic</Btn>
+            </div>
+            <div style={{fontFamily:F.b,fontSize:13,color:B.dm,fontStyle:"italic"}}>
+              Written by Sam Kasle & JP Carmona · 12 min read
+            </div>
+          </div>
+        </Rev>
+
+        {/* In This Issue */}
+        <Rev delay={1}>
+          <div style={{background:B.srf,border:`1px solid ${B.bdr}`,borderRadius:14,padding:"24px 22px"}}>
+            <div style={{fontFamily:F.m,fontSize:10,color:B.g,letterSpacing:2,marginBottom:16}}>IN THIS ISSUE</div>
+            {IN_THIS_ISSUE.map((item,i)=>(
+              <a key={i} href={`#${item.id}`} style={{
+                display:"block",padding:"12px 0",
+                borderBottom:i<IN_THIS_ISSUE.length-1?`1px solid ${B.bdr}`:"none",
+                textDecoration:"none",transition:"opacity .15s",
+              }}>
+                <div style={{display:"flex",gap:10,alignItems:"flex-start"}}>
+                  <span style={{fontFamily:F.m,fontSize:11,color:item.c,minWidth:20}}>{item.n}</span>
+                  <div>
+                    <div style={{fontFamily:F.b,fontSize:14,fontWeight:600,color:B.tx,lineHeight:1.3}}>{item.title}</div>
+                    <div style={{fontFamily:F.b,fontSize:12,color:B.dm,lineHeight:1.4,marginTop:2}}>{item.sub}</div>
+                  </div>
+                </div>
+              </a>
+            ))}
+            <div style={{marginTop:16,padding:"14px 16px",background:B.gS,borderRadius:8,border:`1px solid ${B.gB}`}}>
+              <div style={{fontFamily:F.m,fontSize:10,color:B.g,letterSpacing:1,marginBottom:4}}>NEXT ISSUE · MAY 2026</div>
+              <div style={{fontFamily:F.b,fontSize:13,color:B.tx,lineHeight:1.3}}>The Broker Channel Is Quietly Forcing Carriers to Interoperate</div>
+            </div>
+          </div>
+        </Rev>
+      </div>
     </Wrap>
   );
 }
@@ -389,9 +443,9 @@ function Sub({email,setEmail,done,setDone,compact}){
   if(done)return<div style={{padding:18,background:B.gS,borderRadius:10,border:`1px solid ${B.gB}`,textAlign:"center"}}><p style={{fontFamily:F.b,fontSize:14,fontWeight:600,color:B.g}}>You're in. ✓</p></div>;
   return(
     <div style={{padding:compact?20:28,background:B.srf,borderRadius:14,border:`1px solid ${B.bdr}`}}>
-      {!compact&&<p style={{fontFamily:F.d,fontSize:20,color:B.tx,marginBottom:6}}>Get the next issue</p>}
+      {!compact&&<p style={{fontFamily:F.d,fontSize:20,color:B.tx,marginBottom:6}}>Get the next issue of The Connector</p>}
       <p style={{fontFamily:F.b,fontSize:13,color:B.mu,marginBottom:14,lineHeight:1.5}}>
-        {compact?"No spam. Just the brief.":"Biweekly observations on interoperability, integration debt, and what the smartest carriers are doing about it."}
+        {compact?"No spam. Just the next issue.":"Published biweekly. Each issue maps a different dimension of the interoperability problem — and who's solving it. Direct to your inbox."}
       </p>
       <div style={{display:"flex",gap:8}}>
         <input type="email" placeholder="you@carrier.com" value={email} onChange={e=>setEmail(e.target.value)}
@@ -422,7 +476,7 @@ function Brief({email,setEmail,subDone,setSubDone}){
   };
   return(
     <Wrap id="brief">
-      <Rev><SH tag="The Connector · Issue 001" title="Your Best Engineers Are Becoming Middleware Plumbers"
+      <Rev><SH tag="Feature · Issue 001" title="Your Best Engineers Are Becoming Middleware Plumbers"
         sub="How the integration queue quietly became the most expensive line item in absence & disability ops."/></Rev>
       <Rev>
         <div style={{display:"grid",gridTemplateColumns:open?"1fr":"1fr 300px",gap:32}}>

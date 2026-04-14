@@ -157,7 +157,7 @@ function Masthead() {
         {/* Issue bar */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 0", borderBottom: `1px solid ${B.bdr}` }}>
           <div style={{ fontFamily: F.m, fontSize: 11, color: B.mu, letterSpacing: 1 }}>ISSUE 001 · APRIL 2026 · INAUGURAL EDITION</div>
-          <div style={{ fontFamily: F.b, fontSize: 12, color: B.dm }}>Sam Kasle & JP Carmona</div>
+          <div style={{ fontFamily: F.b, fontSize: 12, color: B.dm }}>Eight by Zero</div>
         </div>
 
         {/* Lead + TOC */}
@@ -230,11 +230,22 @@ function S02() {
   return (
     <section style={{ background: B.black, padding: "20px 0 56px" }}>
       <SectionBreak n="02" title="How 8/0 Works" color={B.g} id="solution" />
-      <W style={{ paddingTop: 28 }}>
-        <Rev><h2 style={{ fontFamily: F.d, fontSize: "clamp(24px,3.5vw,36px)", color: B.tx, lineHeight: 1.15, marginBottom: 12, maxWidth: 620 }}>Hard-coded integrations break. 8/0 agents adapt.</h2></Rev>
-        <Rev><p style={{ fontFamily: F.b, fontSize: 15, color: B.mu, lineHeight: 1.65, maxWidth: 560, marginBottom: 36 }}>An agentic data orchestration layer that connects to any employer system, learns its schema, and delivers clean data to your platform — continuously.</p></Rev>
+      <Narrow style={{ paddingTop: 28 }}>
+        <Rev><h2 style={{ fontFamily: F.d, fontSize: "clamp(24px,3.5vw,36px)", color: B.tx, lineHeight: 1.15, marginBottom: 16, maxWidth: 620 }}>Hard-coded integrations break. 8/0 agents adapt.</h2></Rev>
+        <Rev><p style={{ fontFamily: F.b, fontSize: 15, color: B.mu, lineHeight: 1.75, marginBottom: 18 }}>
+          The conventional approach to carrier-employer connectivity is to hard-code each integration individually. A team builds a connection to Workday. Then UKG. Then ADP. Each one takes months, costs six figures, and requires ongoing maintenance by engineers who were hired to do something far more valuable.
+        </p></Rev>
+        <Rev><p style={{ fontFamily: F.b, fontSize: 15, color: B.mu, lineHeight: 1.75, marginBottom: 18 }}>
+          8/0 takes a fundamentally different approach. Instead of building static, brittle connections one at a time, AI agents learn to connect to employer systems dynamically — parsing API documentation, detecting schema changes, and adapting without human intervention. The result is an orchestration layer that sits between the employer ecosystem and your carrier platform, normalizing everything that flows between them.
+        </p></Rev>
+        <Rev><p style={{ fontFamily: F.b, fontSize: 15, color: B.mu, lineHeight: 1.75, marginBottom: 28 }}>
+          Think of it as the difference between hiring a translator for every language versus deploying one that learns any language on contact. The architecture looks like this:
+        </p></Rev>
+      </Narrow>
+      {/* Architecture diagram — embedded visual */}
+      <W>
         <Rev>
-          <div style={{ marginBottom: 36, padding: "28px 24px", background: B.grey, borderRadius: 12, border: `1px solid ${B.bdr}` }}>
+          <div style={{ marginBottom: 32, padding: "28px 24px", background: B.grey, borderRadius: 12, border: `1px solid ${B.bdr}` }}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr", alignItems: "center" }}>
               <div>
                 <div style={{ fontFamily: F.m, fontSize: 9, color: B.r, letterSpacing: 1.5, marginBottom: 12, textTransform: "uppercase" }}>Employer Ecosystem</div>
@@ -261,7 +272,15 @@ function S02() {
             </div>
           </div>
         </Rev>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12, marginBottom: 36 }}>
+      </W>
+      <Narrow>
+        <Rev><p style={{ fontFamily: F.b, fontSize: 15, color: B.mu, lineHeight: 1.75, marginBottom: 18 }}>
+          The system operates in three phases. First, agents autonomously connect to new employer systems — reading their documentation, mapping fields, and establishing data flows without manual configuration. Second, they interpret the employer's specific policies and translate them into structured workflows the carrier platform can consume. Third, they monitor everything continuously — catching anomalies, auto-correcting mapping drift, and escalating only when they're not confident in the fix.
+        </p></Rev>
+      </Narrow>
+      {/* Capability cards — embedded visual */}
+      <W>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12, marginTop: 8, marginBottom: 32 }}>
           {CAPS.map((c,i)=>(
             <Rev key={i} delay={i+1}>
               <div style={{padding:"24px 20px",background:B.grey,border:`1px solid ${B.bdr}`,borderRadius:10,borderTop:`3px solid ${c.c}`,height:"100%"}}>
@@ -272,8 +291,16 @@ function S02() {
             </Rev>
           ))}
         </div>
+      </W>
+      <Narrow>
+        <Rev><p style={{ fontFamily: F.b, fontSize: 15, color: B.mu, lineHeight: 1.75, marginBottom: 18 }}>
+          The economic impact is stark. What currently takes 200 hours of engineering time per employer connection drops to 2–5 hours. Maintenance ratios shift from one full-time engineer per 10–20 employers to one per 1,000. Data accuracy goes from the 50–75% range — the reality of stale census files and manual reconciliation — to 99%.
+        </p></Rev>
+      </Narrow>
+      {/* Comparison table — embedded visual */}
+      <W>
         <Rev>
-          <div style={{background:B.grey,borderRadius:10,border:`1px solid ${B.bdr}`,overflow:"hidden"}}>
+          <div style={{background:B.grey,borderRadius:10,border:`1px solid ${B.bdr}`,overflow:"hidden",marginBottom:24}}>
             <div style={{display:"grid",gridTemplateColumns:"1.6fr 1fr 1fr",borderBottom:`1px solid ${B.bdr}`}}>
               <div style={{padding:"10px 16px"}}/>
               <div style={{padding:"10px 16px",fontFamily:F.m,fontSize:9,color:B.r,letterSpacing:1.5,textAlign:"center",borderLeft:`1px solid ${B.bdr}`}}>LEGACY</div>
@@ -289,6 +316,11 @@ function S02() {
           </div>
         </Rev>
       </W>
+      <Narrow>
+        <Rev><p style={{ fontFamily: F.b, fontSize: 15, color: B.mu, lineHeight: 1.75 }}>
+          Critically, none of this requires the carrier to rip out existing systems. 8/0 sits alongside what's already in place — policy admin, claims, underwriting — and handles the connectivity layer that those systems were never designed to manage. The dev team that was spending 60% of its time on integration maintenance gets that capacity back for the work they were actually hired to do.
+        </p></Rev>
+      </Narrow>
     </section>
   );
 }
@@ -298,9 +330,18 @@ function S03(){
   return(
     <section style={{background:B.grey,padding:"20px 0 56px"}}>
       <SectionBreak n="03" title="Proof Points" color={B.a} id="proof"/>
-      <W style={{paddingTop:28}}>
-        <Rev><h2 style={{fontFamily:F.d,fontSize:"clamp(24px,3.5vw,36px)",color:B.tx,lineHeight:1.15,marginBottom:12}}>The people who run this world are already seeing it.</h2></Rev>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:12,marginTop:28,marginBottom:28}}>
+      <Narrow style={{paddingTop:28}}>
+        <Rev><h2 style={{fontFamily:F.d,fontSize:"clamp(24px,3.5vw,36px)",color:B.tx,lineHeight:1.15,marginBottom:16}}>The people who run this world are already seeing it.</h2></Rev>
+        <Rev><p style={{fontFamily:F.b,fontSize:15,color:B.mu,lineHeight:1.75,marginBottom:18}}>
+          We spend most of our time inside carrier and TPA operations. Not selling — listening. And the same patterns keep surfacing. A CMO at a top-3 carrier told us the competitive advantage from clean, real-time employer data would command meaningful top-line premium growth. A VP of Claims at a top-3 TPA did the math on their $60M+ annual claims processing cost and identified where the leverage actually sits. A CIO at another top-3 carrier mapped the implementation savings.
+        </p></Rev>
+        <Rev><p style={{fontFamily:F.b,fontSize:15,color:B.mu,lineHeight:1.75,marginBottom:18}}>
+          These aren't theoretical projections. They're estimates from operators who run the numbers on their own books daily. Here's what they see:
+        </p></Rev>
+      </Narrow>
+      {/* Stat cards — embedded visual */}
+      <W>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:12,marginBottom:28}}>
           {PROOF_Q.map((q,i)=>(
             <Rev key={i} delay={i+1}>
               <div style={{padding:"24px 20px",background:B.black,border:`1px solid ${B.bdr}`,borderRadius:10,height:"100%"}}>
@@ -312,15 +353,24 @@ function S03(){
             </Rev>
           ))}
         </div>
-        <Rev>
-          <Narrow style={{padding:0}}>
-            <div style={{padding:"20px 24px",background:B.black,borderRadius:10,borderLeft:`3px solid ${B.s}`}}>
-              <p style={{fontFamily:F.d,fontSize:15,fontStyle:"italic",lineHeight:1.5,color:B.tx,marginBottom:6}}>"A carrier has to approve an employee with chronic migraines for 15-minute breaks, 4 to 5 times per week — getting that right is very complex."</p>
-              <cite style={{fontFamily:F.m,fontSize:10,color:B.s,fontStyle:"normal"}}>— Sr. Director of Claims</cite>
-            </div>
-          </Narrow>
-        </Rev>
       </W>
+      <Narrow>
+        <Rev><p style={{fontFamily:F.b,fontSize:15,color:B.mu,lineHeight:1.75,marginBottom:18}}>
+          What makes these numbers land is context. A 5% revenue lift isn't about charging more — it's about offering differentiated service that brokers and employer groups will pay a premium for because the experience is materially better. A 20% reduction in claims expense isn't about cutting corners — it's about eliminating the manual data-gathering work that consumes 70% of adjudication time today. A 40% onboarding cost reduction isn't about shortcuts — it's about not rebuilding the same integration from scratch every time a new employer shows up with a different HRIS.
+        </p></Rev>
+        <Rev><p style={{fontFamily:F.b,fontSize:15,color:B.mu,lineHeight:1.75,marginBottom:24}}>
+          The complexity is real. Every accommodation, every eligibility edge case, every intermittent leave requires precision data flowing between systems that were never designed to talk to each other.
+        </p></Rev>
+        <Rev>
+          <div style={{padding:"20px 24px",background:B.black,borderRadius:10,borderLeft:`3px solid ${B.s}`}}>
+            <p style={{fontFamily:F.d,fontSize:15,fontStyle:"italic",lineHeight:1.5,color:B.tx,marginBottom:6}}>"A carrier has to approve an employee with chronic migraines for 15-minute breaks, 4 to 5 times per week — getting that right is very complex."</p>
+            <cite style={{fontFamily:F.m,fontSize:10,color:B.s,fontStyle:"normal"}}>— Sr. Director of Claims</cite>
+          </div>
+        </Rev>
+        <Rev><p style={{fontFamily:F.b,fontSize:15,color:B.mu,lineHeight:1.75,marginTop:20}}>
+          Getting it right requires infrastructure that doesn't exist yet in most carrier environments. That's the gap 8/0 fills — not replacing the people who make these decisions, but ensuring they have clean, complete, real-time data when they make them.
+        </p></Rev>
+      </Narrow>
     </section>
   );
 }
@@ -450,10 +500,18 @@ function S07(){
   return(
     <section style={{background:B.grey,padding:"20px 0 56px"}}>
       <SectionBreak n="07" title="Impact" color={B.r} id="impact"/>
-      <W style={{paddingTop:28}}>
-        <Rev><h2 style={{fontFamily:F.d,fontSize:"clamp(24px,3.5vw,36px)",color:B.tx,lineHeight:1.15,marginBottom:12,maxWidth:620}}>Every improvement hits hardest for the people at the bottom.</h2></Rev>
-        <Rev><p style={{fontFamily:F.b,fontSize:15,color:B.mu,lineHeight:1.65,maxWidth:560,marginBottom:36}}>Broken data infrastructure isn't just an operations problem. It's a financial crisis for the workers this system was built to protect.</p></Rev>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:12,marginBottom:36}}>
+      <Narrow style={{paddingTop:28}}>
+        <Rev><h2 style={{fontFamily:F.d,fontSize:"clamp(24px,3.5vw,36px)",color:B.tx,lineHeight:1.15,marginBottom:16,maxWidth:620}}>Every improvement hits hardest for the people at the bottom.</h2></Rev>
+        <Rev><p style={{fontFamily:F.b,fontSize:15,color:B.mu,lineHeight:1.75,marginBottom:18}}>
+          There's a version of this conversation that stays safely in the territory of operational efficiency and carrier economics. But the truth is more uncomfortable. The group insurance system — disability, absence, FMLA — disproportionately serves hourly, frontline, and lower-income workers. The people who stock shelves, drive trucks, work warehouse floors. For them, a disability or absence event isn't an inconvenience. It's a financial emergency.
+        </p></Rev>
+        <Rev><p style={{fontFamily:F.b,fontSize:15,color:B.mu,lineHeight:1.75,marginBottom:18}}>
+          The numbers tell the story plainly. The majority of Americans can't absorb a $1,000 shock. Nearly three-quarters of workers earning under $50K are living paycheck to paycheck. When these workers file a straightforward short-term disability claim, the infrastructure-driven delay between their last paycheck and first benefit payment can stretch 4–8 weeks beyond the contractual elimination period. During that gap, they're choosing between rent and prescriptions.
+        </p></Rev>
+      </Narrow>
+      {/* Crisis stats — embedded visual */}
+      <W>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:12,marginBottom:28}}>
           {[{n:"59%",d:"can't cover a $1K emergency",c:B.r},{n:"72.8%",d:"under $50K live paycheck to paycheck",c:B.r},{n:"4–8 wks",d:"last paycheck to first benefit",c:B.a},{n:"231 days",d:"SSDI processing — up from 110",c:B.a}].map((s,i)=>(
             <Rev key={i} delay={i+1}>
               <div style={{padding:"20px 16px",background:B.black,borderRadius:8,border:`1px solid ${B.bdr}`,height:"100%"}}>
@@ -463,8 +521,16 @@ function S07(){
             </Rev>
           ))}
         </div>
+      </W>
+      <Narrow>
+        <Rev><p style={{fontFamily:F.b,fontSize:15,color:B.mu,lineHeight:1.75,marginBottom:18}}>
+          Consider a warehouse worker earning $38,000 a year who needs surgery. Straightforward STD claim. Under the current system, that claim requires 10–15+ individual touchpoints across HR, the carrier, and the doctor's office. Stale eligibility files trigger manual reconciliation queues. Salary mismatches flag for review. Missing physician forms — mailed, not digital — add another week. By the time the first benefit check arrives, this worker has lost $2,900–$4,600 in income to infrastructure-driven delays alone. Many take payday loans at 300–400% APR. Some tap retirement savings. Some skip the medical care that caused the leave in the first place.
+        </p></Rev>
+      </Narrow>
+      {/* Before/After — embedded visual */}
+      <W>
         <Rev>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:36}}>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:28}}>
             <div style={{padding:"24px 22px",background:B.black,borderRadius:10,borderTop:`3px solid ${B.r}`}}>
               <div style={{fontFamily:F.m,fontSize:9,color:B.r,letterSpacing:1.5,marginBottom:10}}>TODAY</div>
               <div style={{fontFamily:F.d,fontSize:26,color:B.tx,marginBottom:4}}>10–15+</div>
@@ -481,6 +547,17 @@ function S07(){
             </div>
           </div>
         </Rev>
+      </W>
+      <Narrow>
+        <Rev><p style={{fontFamily:F.b,fontSize:15,color:B.mu,lineHeight:1.75,marginBottom:18}}>
+          With clean data infrastructure, the same claim flows differently. The worker or HR enters the event once. Eligibility confirms automatically against real-time census data — no stale files, no reconciliation queue. The physician receives a pre-populated digital form and confirms in hours, not weeks. The adjudicator gets a clean, complete file on first review. Payment triggers immediately on approval. The gap collapses to the contractual elimination period and nothing more.
+        </p></Rev>
+        <Rev><p style={{fontFamily:F.b,fontSize:15,color:B.mu,lineHeight:1.75,marginBottom:18}}>
+          The impact operates through three channels. Speed preserves income — compressing delays by even 2–4 weeks saves a $38K worker $1,450–$2,900 that would otherwise go to late fees, overdrafts, or predatory lending. Accuracy prevents wrongful denials — when eligibility is confirmed pre-adjudication and salary data is correct, denials happen for legitimate medical reasons, not because a census file was 90 days stale. And access becomes possible — clean employer data makes it economically viable for carriers to deliver supplemental products like hospital indemnity and critical illness ($6–$70/month) to the lower-income workers these products were designed for but currently never reach.
+        </p></Rev>
+      </Narrow>
+      {/* Three channels — embedded visual */}
+      <W>
         <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:12,marginBottom:28}}>
           {[{t:"Speed",c:B.g,d:"Preserves $1,450–$2,900 in take-home pay that would otherwise go to late fees, overdrafts, or predatory lending."},{t:"Accuracy",c:B.s,d:"Eliminates data-driven denials at the source — stale files, salary mismatches, ambiguous job codes."},{t:"Access",c:B.a,d:"Enables supplemental products ($6–$70/mo) for the lower-income workers they were designed for."}].map((c,i)=>(
             <Rev key={i} delay={i+1}>
@@ -491,15 +568,18 @@ function S07(){
             </Rev>
           ))}
         </div>
-        <Rev>
-          <Narrow style={{padding:0}}>
-            <div style={{padding:"20px 24px",background:B.black,borderRadius:10,borderLeft:`3px solid ${B.a}`}}>
-              <p style={{fontFamily:F.d,fontSize:15,fontStyle:"italic",lineHeight:1.5,color:B.tx,marginBottom:6}}>"Financial services should provide stability, not stress. But too often, gaps in the system leave families struggling with everyday financial shocks."</p>
-              <cite style={{fontFamily:F.m,fontSize:10,color:B.a,fontStyle:"normal"}}>— Vikas Raj, Co-Founder, ResilienceVC</cite>
-            </div>
-          </Narrow>
-        </Rev>
       </W>
+      <Narrow>
+        <Rev><p style={{fontFamily:F.b,fontSize:15,color:B.mu,lineHeight:1.75,marginBottom:24}}>
+          The financial value of speed, accuracy, and access is inversely proportional to income. Every improvement 8/0 makes produces its highest marginal return for the most underserved members of the covered population. This isn't a secondary benefit of operational efficiency. It's the primary consequence of building systems that work for the people who have the least room for them to fail.
+        </p></Rev>
+        <Rev>
+          <div style={{padding:"20px 24px",background:B.black,borderRadius:10,borderLeft:`3px solid ${B.a}`}}>
+            <p style={{fontFamily:F.d,fontSize:15,fontStyle:"italic",lineHeight:1.5,color:B.tx,marginBottom:6}}>"Financial services should provide stability, not stress. But too often, gaps in the system leave families struggling with everyday financial shocks and unable to build for the future."</p>
+            <cite style={{fontFamily:F.m,fontSize:10,color:B.a,fontStyle:"normal"}}>— Vikas Raj, Co-Founder, ResilienceVC</cite>
+          </div>
+        </Rev>
+      </Narrow>
     </section>
   );
 }

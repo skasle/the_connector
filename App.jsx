@@ -55,7 +55,7 @@ function Sub({email,setEmail,done,setDone}){
   const submit=async()=>{
     if(!email.includes("@")||sending)return;
     setSending(true);
-    try{await fetch(SHEET_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email,source:"connector-001"})});setDone(true)}
+    try{await fetch(SHEET_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:"email="+encodeURIComponent(email)+"&source=connector-001"});setDone(true)}
     catch(e){setDone(true)}
   };
   return<div style={{display:"flex",gap:8}}><input type="email" placeholder="you@carrier.com" value={email} onChange={e=>setEmail(e.target.value)} onKeyDown={e=>e.key==="Enter"&&submit()} style={{flex:1,fontFamily:F.b,fontSize:13,padding:"9px 12px",borderRadius:6,border:`1px solid ${B.bdr}`,background:B.card,color:B.tx}}/><button onClick={submit} style={{fontFamily:F.b,fontSize:13,fontWeight:600,color:B.black,background:B.g,border:"none",borderRadius:6,padding:"9px 20px",cursor:"pointer",opacity:email.includes("@")?1:.4}}>{sending?"...":"Subscribe"}</button></div>;

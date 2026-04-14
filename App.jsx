@@ -48,9 +48,17 @@ const W=({children,style})=><div style={{maxWidth:940,margin:"0 auto",padding:"0
 const N=({children,style})=><div style={{maxWidth:720,margin:"0 auto",padding:"0 28px",...style}}>{children}</div>;
 const P=({children})=><Rev><p style={{fontFamily:F.b,fontSize:15,color:B.mu,lineHeight:1.75,marginBottom:18}}>{children}</p></Rev>;
 function Tag({children,color=B.g}){return<span style={{fontFamily:F.m,fontSize:10,fontWeight:500,letterSpacing:1.5,color,background:color+"15",padding:"3px 10px",borderRadius:3,textTransform:"uppercase"}}>{children}</span>}
+const SHEET_URL="https://script.google.com/macros/s/AKfycbz4gEEB_-9mbYsIcuwgYuu6C4c2xAyrdrRnbPxswmdMoelQ7UNcxUXlT0P4fbeWiAUo/exec";
 function Sub({email,setEmail,done,setDone}){
+  const[sending,setSending]=useState(false);
   if(done)return<div style={{padding:14,background:B.gS,borderRadius:6,border:`1px solid ${B.gB}`,textAlign:"center"}}><span style={{fontFamily:F.b,fontSize:13,fontWeight:600,color:B.g}}>You're in. ✓</span></div>;
-  return<div style={{display:"flex",gap:8}}><input type="email" placeholder="you@carrier.com" value={email} onChange={e=>setEmail(e.target.value)} style={{flex:1,fontFamily:F.b,fontSize:13,padding:"9px 12px",borderRadius:6,border:`1px solid ${B.bdr}`,background:B.card,color:B.tx}}/><button onClick={()=>email.includes("@")&&setDone(true)} style={{fontFamily:F.b,fontSize:13,fontWeight:600,color:B.black,background:B.g,border:"none",borderRadius:6,padding:"9px 20px",cursor:"pointer",opacity:email.includes("@")?1:.4}}>Subscribe</button></div>;
+  const submit=async()=>{
+    if(!email.includes("@")||sending)return;
+    setSending(true);
+    try{await fetch(SHEET_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({email,source:"connector-001"})});setDone(true)}
+    catch(e){setDone(true)}
+  };
+  return<div style={{display:"flex",gap:8}}><input type="email" placeholder="you@carrier.com" value={email} onChange={e=>setEmail(e.target.value)} onKeyDown={e=>e.key==="Enter"&&submit()} style={{flex:1,fontFamily:F.b,fontSize:13,padding:"9px 12px",borderRadius:6,border:`1px solid ${B.bdr}`,background:B.card,color:B.tx}}/><button onClick={submit} style={{fontFamily:F.b,fontSize:13,fontWeight:600,color:B.black,background:B.g,border:"none",borderRadius:6,padding:"9px 20px",cursor:"pointer",opacity:email.includes("@")?1:.4}}>{sending?"...":"Subscribe"}</button></div>;
 }
 function SectionBreak({n,title,color,id}){
   return<div id={id} style={{scrollMarginTop:16,maxWidth:940,margin:"0 auto",padding:"0 28px"}}><div style={{height:3,background:`linear-gradient(90deg,${color},${color}44)`,borderRadius:2}}/><div style={{display:"flex",alignItems:"center",gap:10,padding:"14px 0 6px"}}><span style={{fontFamily:F.m,fontSize:11,color,letterSpacing:1.5}}>SECTION {n} OF 07</span><span style={{fontFamily:F.m,fontSize:11,color:B.dm}}>—</span><span style={{fontFamily:F.m,fontSize:11,color:B.dm,letterSpacing:.5,textTransform:"uppercase"}}>{title}</span></div></div>;

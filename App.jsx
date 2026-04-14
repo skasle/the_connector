@@ -73,7 +73,7 @@ function Masthead(){
     </div>
     <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"12px 0",borderBottom:`1px solid ${B.bdr}`}}>
       <div style={{fontFamily:F.m,fontSize:11,color:B.mu,letterSpacing:1}}>ISSUE 001 · APRIL 2026 · INAUGURAL EDITION</div>
-      <div style={{fontFamily:F.b,fontSize:12,color:B.dm}}>Sam Kasle & JP Carmona</div>
+      <div style={{fontFamily:F.b,fontSize:12,color:B.dm}}>Eight by Zero</div>
     </div>
     <div style={{display:"grid",gridTemplateColumns:"1fr 300px",gap:40,padding:"36px 0 48px"}}>
       <div>

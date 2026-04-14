@@ -52,11 +52,11 @@ const SHEET_URL="https://script.google.com/macros/s/AKfycbz4gEEB_-9mbYsIcuwgYuu6
 function Sub({email,setEmail,done,setDone}){
   const[sending,setSending]=useState(false);
   if(done)return<div style={{padding:14,background:B.gS,borderRadius:6,border:`1px solid ${B.gB}`,textAlign:"center"}}><span style={{fontFamily:F.b,fontSize:13,fontWeight:600,color:B.g}}>You're in. ✓</span></div>;
-  const submit=async()=>{
+  const submit=()=>{
     if(!email.includes("@")||sending)return;
     setSending(true);
-    try{await fetch(SHEET_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:"email="+encodeURIComponent(email)+"&source=connector-001"});setDone(true)}
-    catch(e){setDone(true)}
+    new Image().src=SHEET_URL+"?email="+encodeURIComponent(email)+"&source=connector-001&t="+Date.now();
+    setTimeout(()=>setDone(true),800);
   };
   return<div style={{display:"flex",gap:8}}><input type="email" placeholder="you@carrier.com" value={email} onChange={e=>setEmail(e.target.value)} onKeyDown={e=>e.key==="Enter"&&submit()} style={{flex:1,fontFamily:F.b,fontSize:13,padding:"9px 12px",borderRadius:6,border:`1px solid ${B.bdr}`,background:B.card,color:B.tx}}/><button onClick={submit} style={{fontFamily:F.b,fontSize:13,fontWeight:600,color:B.black,background:B.g,border:"none",borderRadius:6,padding:"9px 20px",cursor:"pointer",opacity:email.includes("@")?1:.4}}>{sending?"...":"Subscribe"}</button></div>;
 }

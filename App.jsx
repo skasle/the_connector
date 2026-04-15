@@ -27,11 +27,11 @@ const css = `
 /* ═══ DATA ═══ */
 const TOC = [
   {n:"01",id:"problem",t:"The Problem",s:"The structural gap carriers didn't create.",c:B.r},
-  {n:"02",id:"solution",t:"The Architecture",s:"Why adaptive agents beat hard-coded integrations.",c:B.g},
-  {n:"03",id:"proof",t:"What Operators Say",s:"Numbers from the people who run this world.",c:B.a},
-  {n:"04",id:"diagnostic",t:"Debt Score",s:"8 questions. 4 dimensions. Where are you?",c:B.s},
-  {n:"05",id:"feature",t:"Feature Article",s:"Your best engineers are becoming plumbers.",c:B.g},
-  {n:"06",id:"podcast",t:"Issue 002 Preview",s:"What's coming next.",c:B.s},
+  {n:"02",id:"carrier",t:"The Carrier Did Everything Right",s:"So why did the claim still get stuck?",c:B.a},
+  {n:"03",id:"solution",t:"The Architecture",s:"Why adaptive agents beat hard-coded integrations.",c:B.g},
+  {n:"04",id:"proof",t:"What Operators Say",s:"Numbers from the people who run this world.",c:B.a},
+  {n:"05",id:"diagnostic",t:"Debt Score",s:"8 questions. 4 dimensions. Where are you?",c:B.s},
+  {n:"06",id:"feature",t:"Feature Article",s:"Your best engineers are becoming plumbers.",c:B.g},
   {n:"07",id:"impact",t:"Impact",s:"Every delay hits hardest at the bottom.",c:B.r},
 ];
 const PAIN=[
@@ -214,7 +214,8 @@ function Masthead(){
       </div>
       <div style={{display:"grid",gridTemplateColumns:"1fr 300px",gap:40,padding:"36px 0 32px"}}>
         <div>
-          <h1 style={{fontFamily:F.d,fontSize:"clamp(26px,3.5vw,38px)",fontWeight:400,lineHeight:1.15,letterSpacing:-.5,color:B.tx,marginBottom:16}}>The absence & disability ecosystem runs on broken data plumbing. Nobody built it that way on purpose. This issue maps how it happened — and what a different architecture looks like.</h1>
+          <h1 style={{fontFamily:F.d,fontSize:"clamp(28px,4vw,44px)",fontWeight:400,lineHeight:1.1,letterSpacing:-.5,color:B.tx,marginBottom:10}}>The absence & disability ecosystem runs on broken data plumbing.</h1>
+          <h2 style={{fontFamily:F.d,fontSize:"clamp(16px,2vw,22px)",fontWeight:400,fontStyle:"italic",lineHeight:1.35,color:B.mu,marginBottom:16}}>Nobody built it that way on purpose. This issue maps how it happened — and what a different architecture looks like.</h2>
           <p style={{fontFamily:F.b,fontSize:15,color:B.mu,lineHeight:1.65,marginBottom:20}}>Inside: the real numbers on integration debt, how agentic orchestration changes the economics, what operators are already seeing in their own books, and why every improvement lands hardest for the workers who need it most.</p>
           <div style={{fontFamily:F.b,fontSize:13,color:B.dm}}>12 min read · <a href="#diagnostic" style={{color:B.g}}>Jump to the Diagnostic →</a></div>
         </div>
@@ -267,10 +268,62 @@ function S01(){return(
   </section>
 );}
 
-/* ═══ 02 · SOLUTION ═══ */
-function S02(){return(
+/* ═══ 02 · DAWN'S ARTICLE ═══ */
+function SDawn(){
+  const[open,setOpen]=useState(false);
+  const DAWN=[
+    {t:"lede",v:"Walk through what a well-run carrier actually does when a short-term disability claim comes in. Online and phone filing, both available. The carrier contacts the employer directly for the Employer's Statement — the claimant doesn't chase anyone. The attending physician receives a fax and up to three follow-up attempts. Text alerts at every status change. A decision in roughly a week once paperwork is complete."},
+    {t:"p",v:"That's not a broken process. That's a carrier that has genuinely invested in the claimant experience. So why do claims still stall?"},
+    {t:"h",v:"The problem isn't at intake"},
+    {t:"p",v:"The bottleneck is what happens before the claim arrives. When the carrier pulls the employer's census file to verify eligibility, it may be 60 to 90 days old. The job code in the HR system doesn't match the classification in the policy. The salary figure conflicts with what payroll reported last quarter. The claim lands in a manual reconciliation queue — not because the carrier failed, but because the data it depends on was already wrong before the process started."},
+    {t:"p",v:"This is the structural reality of how employer HR systems and group insurance carriers currently connect — which is to say, they mostly don't. Data moves by file export, scheduled batch transfer, or phone call. It arrives late, incomplete, and out of sync with what a carrier needs to process a clean first pass."},
+    {t:"q",v:"We can't solve the challenges associated with acquiring medical data. But we can eliminate the reconciliation chaos that slows everything down before a claim even starts — the stale census files, the job codes that don't match, the salary figures that conflict.",a:"Dawn McMaster, 2nd VP, Munich Re"},
+    {t:"h",v:"The carrier built a great experience. The data showed up unworthy of it."},
+    {t:"p",v:"Roughly 90% of carriers have tried to solve this by building integrations in-house. A single HRIS integration — one vendor, one connection — can cost $750K to build and $300K annually to maintain. A carrier serving employers across 20+ HR platforms faces the same problem dozens of times over. Generic API aggregators cover some of the gap, but they weren't built for insurance workflows. Carriers end up doing significant custom work on top."},
+    {t:"p",v:"The result: a carrier that invested heavily in the claimant experience ends up absorbing blame for delays that were never theirs to own. The infrastructure problem sits upstream, in the employer-to-carrier data layer — invisible to claimants, invisible to brokers, and stubbornly resistant to any solution a carrier can build from their side of the connection."},
+    {t:"close",v:"The middleware doesn't take the spotlight. It just makes sure the carrier gets to keep it."},
+  ];
+  const renderB=(b,i)=>{
+    if(b.t==="lede")return<p key={i} style={{fontFamily:F.b,fontSize:16,lineHeight:1.7,color:B.tx,marginBottom:20,fontWeight:300,borderLeft:`3px solid ${B.a}`,paddingLeft:16}}>{b.v}</p>;
+    if(b.t==="p")return<p key={i} style={{fontFamily:F.b,fontSize:15,lineHeight:1.78,color:B.mu,marginBottom:16}}>{b.v}</p>;
+    if(b.t==="h")return<h3 key={i} style={{fontFamily:F.d,fontSize:22,color:B.tx,marginTop:26,marginBottom:10}}>{b.v}</h3>;
+    if(b.t==="q")return<blockquote key={i} style={{margin:"22px 0",padding:"18px 22px",background:B.black,borderRadius:10,borderLeft:`3px solid ${B.a}`}}><p style={{fontFamily:F.d,fontSize:15,fontStyle:"italic",lineHeight:1.5,color:B.tx,marginBottom:6}}>"{b.v}"</p><cite style={{fontFamily:F.m,fontSize:10,color:B.a,fontStyle:"normal"}}>— {b.a}</cite></blockquote>;
+    if(b.t==="close")return<p key={i} style={{fontFamily:F.d,fontSize:18,fontStyle:"italic",lineHeight:1.6,color:B.tx,marginTop:24,paddingTop:20,borderTop:`1px solid ${B.bdr}`}}>{b.v}</p>;
+    return null;
+  };
+  const pre=DAWN.slice(0,3),rest=DAWN.slice(3);
+  return(
+    <section style={{background:B.black,padding:"20px 0 56px"}}>
+      <SectionBreak n="02" title="Guest Essay" color={B.a} id="carrier"/>
+      <N style={{paddingTop:28}}>
+        <Rev>
+          <h2 style={{fontFamily:F.d,fontSize:"clamp(24px,3.5vw,34px)",color:B.tx,lineHeight:1.15,marginBottom:8}}>The Carrier Did Everything Right. The Claim Still Got Stuck.</h2>
+          <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:24,paddingBottom:18,borderBottom:`1px solid ${B.bdr}`}}>
+            <div style={{width:32,height:32,borderRadius:"50%",background:`linear-gradient(135deg,${B.a}22,${B.a}0a)`,border:`1px solid ${B.a}44`,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
+              <span style={{fontFamily:F.m,fontSize:10,color:B.a,fontWeight:700}}>DM</span>
+            </div>
+            <div>
+              <div style={{fontFamily:F.b,fontSize:13,fontWeight:600,color:B.tx}}>Dawn McMaster</div>
+              <div style={{fontFamily:F.m,fontSize:10,color:B.dm}}>2nd VP, Munich Re · 4 min read</div>
+            </div>
+          </div>
+        </Rev>
+        <Rev><div>
+          {pre.map(renderB)}
+          {!open&&<div style={{textAlign:"center",paddingTop:4}}>
+            <button onClick={()=>setOpen(true)} style={{fontFamily:F.b,fontSize:13,fontWeight:600,color:B.a,background:B.a+"15",border:`1px solid ${B.a}33`,borderRadius:6,padding:"9px 24px",cursor:"pointer"}}>Continue reading ↓</button>
+          </div>}
+          {open&&rest.map(renderB)}
+        </div></Rev>
+      </N>
+    </section>
+  );
+}
+
+/* ═══ 03 · ARCHITECTURE ═══ */
+function S03arch(){return(
   <section style={{background:B.black,padding:"20px 0 56px"}}>
-    <SectionBreak n="02" title="The Architecture" color={B.g} id="solution"/>
+    <SectionBreak n="03" title="The Architecture" color={B.g} id="solution"/>
     <N style={{paddingTop:28}}>
       <Rev><h2 style={{fontFamily:F.d,fontSize:"clamp(24px,3.5vw,36px)",color:B.tx,lineHeight:1.15,marginBottom:12,maxWidth:620}}>Hard-coded integrations break. Adaptive agents don't.</h2></Rev>
       <Rev><p style={{fontFamily:F.b,fontSize:15,color:B.mu,lineHeight:1.65,maxWidth:560,marginBottom:24}}>The conventional approach builds one static connection at a time. An agentic architecture learns to connect dynamically — parsing documentation, detecting schema changes, and adapting without human intervention.</p></Rev>
@@ -331,7 +384,7 @@ function S02(){return(
 /* ═══ 03 · PROOF ═══ */
 function S03(){return(
   <section style={{background:B.grey,padding:"20px 0 56px"}}>
-    <SectionBreak n="03" title="What Operators Say" color={B.a} id="proof"/>
+    <SectionBreak n="04" title="What Operators Say" color={B.a} id="proof"/>
     <N style={{paddingTop:28}}>
       <Rev><h2 style={{fontFamily:F.d,fontSize:"clamp(24px,3.5vw,36px)",color:B.tx,lineHeight:1.15,marginBottom:12}}>The people who run this world are already doing the math.</h2></Rev>
       <Rev><p style={{fontFamily:F.b,fontSize:15,color:B.mu,lineHeight:1.65,maxWidth:560,marginBottom:24}}>Three data points from operators who track these numbers on their own books daily.</p></Rev>
@@ -361,7 +414,7 @@ function S04(){
   const[h,setH]=useState(false);
   return(
     <section style={{background:B.black,padding:"20px 0 56px"}}>
-      <SectionBreak n="04" title="Your Debt Score" color={B.s} id="diagnostic"/>
+      <SectionBreak n="05" title="Your Debt Score" color={B.s} id="diagnostic"/>
       <W style={{paddingTop:28}}><Rev>
         <div style={{padding:"44px 32px",background:B.grey,borderRadius:14,border:`1px solid ${B.bdr}`,textAlign:"center",position:"relative",overflow:"hidden"}}>
           <div style={{position:"absolute",inset:0,background:`radial-gradient(ellipse at 50% 0%,${B.g}06,transparent 60%)`,pointerEvents:"none"}}/>
@@ -400,7 +453,7 @@ function S05({email,setEmail,subDone,setSubDone}){
   };
   return(
     <section style={{background:B.grey,padding:"20px 0 56px"}}>
-      <SectionBreak n="05" title="Feature Article" color={B.g} id="feature"/>
+      <SectionBreak n="06" title="Feature Article" color={B.g} id="feature"/>
       <N style={{paddingTop:28}}>
         <Rev>
           <h2 style={{fontFamily:F.d,fontSize:"clamp(24px,3.5vw,34px)",color:B.tx,lineHeight:1.15,marginBottom:8}}>Your Best Engineers Are Becoming Middleware Plumbers</h2>
@@ -416,48 +469,6 @@ function S05({email,setEmail,subDone,setSubDone}){
           </div></>}
         </div></Rev>
       </N>
-    </section>
-  );
-}
-
-/* ═══ 06 · ISSUE 002 PREVIEW ═══ */
-function S06(){
-  return(
-    <section style={{background:B.black,padding:"20px 0 56px"}}>
-      <SectionBreak n="06" title="Issue 002 Preview" color={B.s} id="podcast"/>
-      <W style={{paddingTop:28}}>
-        <Rev><div style={{
-          padding:"40px 36px",
-          background:B.grey,
-          borderRadius:12,
-          border:`1px dashed ${B.bdr2}`,
-          display:"grid",
-          gridTemplateColumns:"1fr 1fr",
-          gap:40,
-          alignItems:"center",
-        }}>
-          <div>
-            <div style={{fontFamily:F.m,fontSize:10,color:B.s,letterSpacing:2,marginBottom:14}}>COMING IN ISSUE 002</div>
-            <h2 style={{fontFamily:F.d,fontSize:"clamp(22px,3vw,30px)",color:B.tx,lineHeight:1.2,marginBottom:14}}>The Podcast — and What's Next</h2>
-            <p style={{fontFamily:F.b,fontSize:14,color:B.mu,lineHeight:1.65,marginBottom:20}}>Issue 002 launches with a 10-minute audio companion — the same story, easier to consume on a commute. Plus: a deeper look at the adjudication side of the problem, and what clean data actually changes for the people making benefits decisions.</p>
-            <div style={{fontFamily:F.m,fontSize:10,color:B.dm,letterSpacing:1}}>COMING SOON ON</div>
-            <div style={{display:"flex",gap:8,marginTop:8,flexWrap:"wrap"}}>
-              {["Apple Podcasts","Spotify","YouTube"].map(p=><span key={p} style={{fontFamily:F.b,fontSize:10,color:B.dm,padding:"4px 10px",background:B.card,border:`1px solid ${B.bdr}`,borderRadius:4}}>{p}</span>)}
-            </div>
-          </div>
-          <div style={{borderLeft:`1px solid ${B.bdr}`,paddingLeft:40}}>
-            <div style={{fontFamily:F.m,fontSize:10,color:B.g,letterSpacing:2,marginBottom:14}}>ALSO IN 002</div>
-            {[
-              {t:"The Adjudication Gap",d:"What happens when clean data hits an understaffed claims team?"},
-              {t:"Carrier as Superhero",d:"How data infrastructure changes what carriers can promise employers."},
-              {t:"The $6 Product",d:"Why supplemental benefits never reach the workers they were designed for."},
-            ].map((item,i)=><div key={i} style={{marginBottom:16,paddingBottom:16,borderBottom:i<2?`1px solid ${B.bdr}`:"none"}}>
-              <div style={{fontFamily:F.b,fontSize:13,fontWeight:600,color:B.tx,marginBottom:3}}>{item.t}</div>
-              <div style={{fontFamily:F.b,fontSize:11,color:B.dm,lineHeight:1.5}}>{item.d}</div>
-            </div>)}
-          </div>
-        </div></Rev>
-      </W>
     </section>
   );
 }
@@ -518,6 +529,16 @@ function S07(){return(
 function Footer({email,setEmail,subDone,setSubDone}){return(
   <footer style={{background:B.black,padding:"20px 0 24px"}}><W>
     <div style={{height:2,background:B.g,marginBottom:32,borderRadius:1}}/>
+    {/* Issue 002 teaser strip */}
+    <div style={{marginBottom:28,padding:"18px 22px",background:B.grey,borderRadius:10,border:`1px dashed ${B.bdr2}`,display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:16}}>
+      <div>
+        <div style={{fontFamily:F.m,fontSize:9,color:B.s,letterSpacing:2,marginBottom:4}}>COMING IN ISSUE 002</div>
+        <div style={{display:"flex",gap:20,flexWrap:"wrap"}}>
+          {["The Adjudication Gap","Carrier as Superhero","The $6 Product","The Podcast"].map((t,i)=><span key={i} style={{fontFamily:F.b,fontSize:11,color:B.dm}}>· {t}</span>)}
+        </div>
+      </div>
+      <div style={{fontFamily:F.m,fontSize:10,color:B.dm,whiteSpace:"nowrap"}}>Subscribe below to get it →</div>
+    </div>
     <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:32,marginBottom:32}}>
       <div>
         <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
@@ -549,9 +570,9 @@ export default function App(){
   useProgress();
   return<div style={{background:B.black,minHeight:"100vh",fontFamily:F.b,color:B.tx}}>
     <style>{css}</style><div id="progress-bar"/><Masthead/>
-    <S01/><S02/><S03/><S04/>
+    <S01/><SDawn/><S03arch/><S03/><S04/>
     <S05 email={email} setEmail={setEmail} subDone={subDone} setSubDone={setSubDone}/>
-    <S06/><S07/>
+    <S07/>
     <Footer email={email} setEmail={setEmail} subDone={subDone} setSubDone={setSubDone}/>
   </div>;
 }

@@ -193,14 +193,74 @@ function DiagnosticStrip(){
   </div>;
 }
 
+/* ═══ SIDEWAYS-8 FRACTAL MARK ═══ */
+// Four orbs of typographic 8 glyphs in a horizontal ribbon. The CENTER
+// pair fuses into the brand 8/0; the outer pair extends the pattern
+// to either side. Each orb's outer edge fades to transparent, so the
+// ribbon reads as a snapshot of a pattern that continues off-canvas.
+function SidewaysEightMark({accent = B.g}){
+  const R = 78, cy = 100, H = 200, W = 1800, cxC = W / 2;
+  const orbs = [
+    {cx: cxC - 3*R, opacityMult: 0.55},
+    {cx: cxC - R,   opacityMult: 1.0},   // brand 8/0 — left
+    {cx: cxC + R,   opacityMult: 1.0},   // brand 8/0 — right
+    {cx: cxC + 3*R, opacityMult: 0.55},
+  ];
+  const fadeBoth =
+    "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.45) 8%, #000 22%, #000 78%, rgba(0,0,0,0.45) 92%, transparent 100%)";
+  const orbContent = (cx, key, opacityMult) => {
+    const rings = [
+      {r: R*0.96, s: 14, o: 0.45},
+      {r: R*0.78, s: 12, o: 0.36},
+      {r: R*0.60, s: 11, o: 0.28},
+      {r: R*0.42, s: 10, o: 0.22},
+    ];
+    const eights = (radius, fs) => "8".repeat(Math.ceil((2*Math.PI*radius)/(fs*0.55))+8);
+    return (
+      <g key={key} style={{WebkitMaskImage: fadeBoth, maskImage: fadeBoth}}>
+        <defs>
+          {rings.map((r, i) => (
+            <path key={i} id={`${key}-${i}`} fill="none"
+              d={`M ${cx - r.r},${cy} a ${r.r},${r.r} 0 1,1 ${r.r*2},0 a ${r.r},${r.r} 0 1,1 ${-r.r*2},0`}/>
+          ))}
+        </defs>
+        {rings.map((r, i) => (
+          <text key={i} fontSize={r.s} fill={accent} opacity={r.o * opacityMult}
+            fontFamily="'JetBrains Mono','Fira Code',monospace" fontWeight={500}
+            textLength={2*Math.PI*r.r} lengthAdjust="spacingAndGlyphs">
+            <textPath href={`#${key}-${i}`} startOffset="0">{eights(r.r, r.s)}</textPath>
+          </text>
+        ))}
+      </g>
+    );
+  };
+  return (
+    <div style={{
+      position: "absolute",
+      top: "50%", left: "50%",
+      transform: "translate(-50%, -50%)",
+      width: `${W}px`, height: `${H}px`,
+      pointerEvents: "none", zIndex: 1,
+      WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%)",
+              maskImage: "linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%)",
+    }}>
+      <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} style={{display: "block"}}>
+        {orbs.map((o, i) => orbContent(o.cx, `sw-${i}`, o.opacityMult))}
+      </svg>
+    </div>
+  );
+}
+
 /* ═══ MASTHEAD ═══ */
 function Masthead(){
-  return <section style={{background:B.black, paddingTop:40}}>
+  return <section style={{background:B.black, paddingTop:40, position:"relative", overflow:"hidden"}}>
     <W>
-      <div style={{textAlign:"center", paddingBottom:24, borderBottom:`2px solid ${B.g}`}}>
-        <div style={{fontFamily:F.m, fontSize:11, color:B.g, letterSpacing:3, marginBottom:8}}>EIGHT BY ZERO PRESENTS</div>
-        <div style={{fontFamily:F.d, fontSize:"clamp(40px,6vw,64px)", fontWeight:400, color:B.tx, lineHeight:1, letterSpacing:-2}}>The Connector</div>
-        <div style={{fontFamily:F.b, fontSize:13, color:B.dm, marginTop:8}}>Agentic interoperability for absence & disability insurance</div>
+      <div style={{textAlign:"center", paddingTop:48, paddingBottom:38, borderBottom:`2px solid ${B.g}`, position:"relative"}}>
+        <SidewaysEightMark/>
+        <div style={{position:"relative", zIndex:2}}>
+          <div style={{fontFamily:F.d, fontSize:"clamp(40px,6vw,64px)", fontWeight:400, color:B.tx, lineHeight:1, letterSpacing:-2, textShadow:"0 2px 0 rgba(0,0,0,0.55), 0 12px 28px rgba(0,0,0,0.6)"}}>The Connector</div>
+          <div style={{fontFamily:F.b, fontSize:13, color:B.dm, marginTop:8}}>Agentic interoperability for absence & disability insurance</div>
+        </div>
       </div>
       <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", padding:"12px 0", borderBottom:`1px solid ${B.bdr}`}}>
         <div style={{fontFamily:F.m, fontSize:11, color:B.mu, letterSpacing:1}}>ISSUE 002 · MAY 2026</div>

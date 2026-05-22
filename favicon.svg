@@ -1,4 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#2ecc71"/>
-  <text x="16" y="22" text-anchor="middle" font-family="monospace" font-weight="700" font-size="14" fill="#080c0a">8/0</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="8" fill="#061F15"></rect>
+  <rect x="8" y="8" width="48" height="48" stroke="#10C880" stroke-width="4" fill="none"></rect>
+  <line x1="56" y1="8" x2="8" y2="56" stroke="#10C880" stroke-width="4"></line>
+  <text x="22" y="30" font-family="Manrope, system-ui, sans-serif" font-size="22" font-weight="800" fill="#10C880" text-anchor="middle">8</text>
+  <text x="42" y="52" font-family="Manrope, system-ui, sans-serif" font-size="22" font-weight="800" fill="#10C880" text-anchor="middle">0</text>
 </svg>
